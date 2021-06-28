@@ -69,7 +69,8 @@ public class AlgaMoneyExceptionHandler extends ResponseEntityExceptionHandler {
 
     }
 
-    @ExceptionHandler
+    @ExceptionHandler({ NullPointerException.class })
+    @ResponseStatus(HttpStatus.NOT_FOUND)
     public ResponseEntity<Object> handleNullPointerException(NullPointerException ex, WebRequest request) {
         return handleExceptionInternal(ex, "O campo Pessoa.ativo não pode ser nulo", new HttpHeaders(), HttpStatus.NOT_FOUND,
                 request);
