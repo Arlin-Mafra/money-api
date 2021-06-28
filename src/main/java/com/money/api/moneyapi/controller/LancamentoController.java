@@ -1,6 +1,5 @@
 package com.money.api.moneyapi.controller;
 
-import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -11,6 +10,8 @@ import com.money.api.moneyapi.repository.LancamentoRepository;
 import com.money.api.moneyapi.repository.filter.LancamentoFilter;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -31,8 +32,8 @@ public class LancamentoController {
     private LancamentoRepository lancamentoRepo;
 
     @GetMapping
-    public List<Lancamento> pesquisar(LancamentoFilter lancamentoFilter) {
-        return lancamentoRepo.filtrar(lancamentoFilter);
+    public Page<Lancamento> pesquisar(LancamentoFilter lancamentoFilter, Pageable pageable) {
+        return lancamentoRepo.filtrar(lancamentoFilter, pageable);
     }
 
     @GetMapping(path = "/{id}")
